@@ -283,7 +283,7 @@ func raycastColliding(ray : RayCast3D):
 # Is called by the pickable object script, put the object in the player hand
 func objectToHold(object):
 	if object != null && itemToHold == null:
-		var isRequesteAproved
+		var isRequesteAproved # is not use for the moment 
 		if multiplayer.is_server():
 			isRequesteAproved = get_node("/root/Main/Networking/PickedObjectManager").request_add_picked_weapon(object, self.get_path())
 		else:
@@ -292,11 +292,9 @@ func objectToHold(object):
 		await get_tree().create_timer(0.5).timeout
 		print("REQUEST APPROVED : " +  str(isRequesteAproved))
 		
-		# Don't instantiate if the object don't exist in a picked wepon state
-		if isRequesteAproved:
-			itemToHold = get_node("Head/Camera3D/WeaponMarker3D").get_children()
-			itemToHold[0].holdingCharacter = self
-			print("ITEM TO HOLD : " + str(itemToHold))
+		itemToHold = get_node("Head/Camera3D/WeaponMarker3D").get_children()
+		itemToHold[0].holdingCharacter = self
+		print("ITEM TO HOLD : " + str(itemToHold))
 
 
 func showLife():
