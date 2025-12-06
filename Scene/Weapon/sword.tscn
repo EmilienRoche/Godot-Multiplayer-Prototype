@@ -1,0 +1,209 @@
+[gd_scene load_steps=10 format=3 uid="uid://b8g6bhsewoo62"]
+
+[ext_resource type="PackedScene" uid="uid://jpb3i4j8vj2a" path="res://Asset/Weapon/Sword.tscn" id="1_30qgk"]
+[ext_resource type="Script" uid="uid://bbi1c42w37865" path="res://Scene/Weapon/sword.gd" id="1_l4vip"]
+[ext_resource type="PackedScene" uid="uid://b06w2g4myuic" path="res://Scene/Component/hitbox_componnent.tscn" id="2_l4vip"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tnu0y"]
+size = Vector3(0.108398, 0.103516, 0.0898438)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6gilf"]
+radius = 0.202305
+height = 0.926527
+
+[sub_resource type="Animation" id="Animation_tnu0y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.13446, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox:monitorable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_6gilf"]
+resource_name = "attackAnimation"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.745256, 2.33525, -1.87274), Vector3(0, 1.13446, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.885, -0.345, -0.145), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox:monitorable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+
+[sub_resource type="Animation" id="Animation_l4vip"]
+resource_name = "attackAnimation"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.13446, 0), Vector3(0.261799, 1.13446, 0.261799), Vector3(0.745256, 2.33525, -1.87274)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.264942, 0.147146), Vector3(-0.885, -0.345, -0.145)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox:monitorable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6gilf"]
+_data = {
+&"RESET": SubResource("Animation_tnu0y"),
+&"afterSimpleAttackAnimation": SubResource("Animation_6gilf"),
+&"attackAnimation": SubResource("Animation_l4vip")
+}
+
+[node name="Sword" type="StaticBody3D" groups=["weapon"]]
+transform = Transform3D(0.422622, 0, 0.906306, 0, 1, 0, -0.906306, 0, 0.422622, 0, 0, 0)
+script = ExtResource("1_l4vip")
+coolDown = 0.5
+
+[node name="MeshInstance3D" parent="." instance=ExtResource("1_30qgk")]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0098877, 0.223999, 0)
+shape = SubResource("BoxShape3D_tnu0y")
+disabled = true
+
+[node name="Hitbox" parent="." instance=ExtResource("2_l4vip")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00752962, 0.40136, 0)
+collision_mask = 64
+damage = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("CapsuleShape3D_6gilf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6gilf")
+}
+
+[node name="CoolDownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ImpactTimeTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="hitingSomething" from="Hitbox" to="." method="_on_hitbox_hiting_something"]

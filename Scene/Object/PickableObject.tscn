@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://droyn0t3igyl1"]
+
+[ext_resource type="Script" uid="uid://bt0a2ewlrehaw" path="res://Script/Object/pickable_object.gd" id="1_dosjj"]
+[ext_resource type="PackedScene" uid="uid://jpb3i4j8vj2a" path="res://Asset/Weapon/Sword.tscn" id="2_bhy3m"]
+[ext_resource type="PackedScene" uid="uid://cjggvvcbayu5" path="res://Asset/Weapon/AnvilHammer.tscn" id="3_x8jf4"]
+[ext_resource type="PackedScene" uid="uid://mpowagud6vks" path="res://Asset/Weapon/Dagger.tscn" id="4_sarwl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ur34e"]
+size = Vector3(0.26, 0.065, 1.232)
+
+[node name="PickableObject" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 15
+mass = 5.0
+continuous_cd = true
+script = ExtResource("1_dosjj")
+objectPaths = Dictionary[String, PackedScene]({
+"AnvilHammer": ExtResource("3_x8jf4"),
+"Dagger": ExtResource("4_sarwl"),
+"Sword": ExtResource("2_bhy3m")
+})
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00179866, 0, -0.234215)
+shape = SubResource("BoxShape3D_ur34e")
+disabled = true
+debug_color = Color(0.52549, 0.537255, 0.54902, 0.517647)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.205517, 0)
+visible = false
+billboard = 1
+render_priority = 1
+text = "E"
+uppercase = true

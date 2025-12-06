@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://cy82ctqups2jq"]
+
+[ext_resource type="Script" uid="uid://ppacgfqm3r0k" path="res://Script/button.gd" id="1_gwfd0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3pt4j"]
+albedo_color = Color(0.821911, 2.62313e-06, 7.70092e-07, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7y4ci"]
+material = SubResource("StandardMaterial3D_3pt4j")
+size = Vector3(0.3, 0.05, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwfd0"]
+albedo_color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w4jke"]
+material = SubResource("StandardMaterial3D_gwfd0")
+size = Vector3(0.5, 1, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gwfd0"]
+size = Vector3(0.5, 1, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mxd2g"]
+size = Vector3(1.65259, 1.61572, 1.62305)
+
+[node name="Button" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.529959, 0)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_gwfd0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52343, 0)
+mesh = SubResource("BoxMesh_7y4ci")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_w4jke")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_gwfd0")
+
+[node name="buttonArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52343, 0)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="buttonArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.200927, 0)
+shape = SubResource("BoxShape3D_mxd2g")
+
+[node name="ThingToSpawnLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75165, 0)
+billboard = 1
+text = "NULL"
+font_size = 64
+
+[connection signal="body_entered" from="buttonArea" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="buttonArea" to="." method="_on_area_3d_body_exited"]

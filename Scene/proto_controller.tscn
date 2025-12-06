@@ -1,0 +1,153 @@
+[gd_scene load_steps=17 format=3 uid="uid://clev6jg3sjyio"]
+
+[ext_resource type="Script" uid="uid://cvgn3tlve8xy7" path="res://Script/proto_controller.gd" id="1_nlc6u"]
+[ext_resource type="Script" uid="uid://b6olqblclvmyn" path="res://Script/camera_3d.gd" id="2_348m6"]
+[ext_resource type="PackedScene" uid="uid://b06w2g4myuic" path="res://Scene/Component/hitbox_componnent.tscn" id="3_0el03"]
+[ext_resource type="PackedScene" uid="uid://crnphwu5n4154" path="res://Scene/Component/life_componnent.tscn" id="4_0el03"]
+[ext_resource type="PackedScene" uid="uid://dftjapl6twn5o" path="res://Scene/Component/hurt_box_componnent.tscn" id="5_pi4mt"]
+[ext_resource type="PackedScene" uid="uid://crb8cg5ovy1dh" path="res://Scene/Component/inventory.tscn" id="6_dls84"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
+albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ucva2"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pi4mt"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_3qqv4"]
+material = SubResource("StandardMaterial3D_pi4mt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dls84"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_pi4mt"]
+material = SubResource("StandardMaterial3D_dls84")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iof21"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_348m6"]
+radius = 0.900699
+height = 2.13282
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pi4mt"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dls84"]
+radius = 0.498287
+height = 1.76743
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_nlc6u")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+material_override = SubResource("StandardMaterial3D_iof21")
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_ucva2")
+
+[node name="Eyes" type="Node3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh/Eyes"]
+transform = Transform3D(0.205, 0, 0, 0, 0.205, 0, 0, 0, 0.205, 0.180359, 1.46258, -0.312263)
+visibility_range_begin = 0.5
+mesh = SubResource("SphereMesh_3qqv4")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh/Eyes/MeshInstance3D"]
+transform = Transform3D(0.852726, -0.179368, -0.0794353, 0.178594, 0.856418, -0.0166369, 0.0811588, 0, 0.871228, 0.0280534, 0, -0.0645221)
+visibility_range_begin = 0.5
+mesh = SubResource("SphereMesh_pi4mt")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Mesh/Eyes"]
+transform = Transform3D(0.205, 0, 0, 0, 0.205, 0, 0, 0, 0.205, -0.190379, 1.46258, -0.312263)
+visibility_range_begin = 0.5
+mesh = SubResource("SphereMesh_3qqv4")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh/Eyes/MeshInstance3D2"]
+transform = Transform3D(0.852726, -0.179368, -0.0794353, 0.178594, 0.856418, -0.0166369, 0.0811588, 0, 0.871228, -0.0424245, 0, -0.0570371)
+visibility_range_begin = 0.5
+mesh = SubResource("SphereMesh_pi4mt")
+
+[node name="Label3D" type="Label3D" parent="Mesh"]
+transform = Transform3D(-1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, -1, 0, 1.12368, 0)
+billboard = 1
+text = "USERNAME"
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_iof21")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.224666, -0.139728)
+script = ExtResource("2_348m6")
+
+[node name="Marker3D" type="Marker3D" parent="Head/Camera3D"]
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" groups=["raycastPlayer"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0214105, 0)
+visible = false
+target_position = Vector3(0, 0, -2)
+collision_mask = 8
+
+[node name="WeaponMarker3D" type="Marker3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.557, -0.146, -0.491)
+
+[node name="DashTime" type="Timer" parent="."]
+
+[node name="WallJumpTime" type="Timer" parent="."]
+
+[node name="CoolDownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="interactionArea3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="interactionArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.906929, 0)
+shape = SubResource("CapsuleShape3D_348m6")
+
+[node name="Hitbox" parent="." instance=ExtResource("3_0el03")]
+collision_mask = 64
+damage = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.975924, -0.676646)
+shape = SubResource("CapsuleShape3D_pi4mt")
+
+[node name="Life" parent="." instance=ExtResource("4_0el03")]
+MAX_HEALTH = 100
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("lifeComponnent") instance=ExtResource("5_pi4mt")]
+collision_mask = 128
+lifeComponnent = NodePath("../Life")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.927449, 0)
+shape = SubResource("CapsuleShape3D_dls84")
+
+[node name="Inventory" parent="." instance=ExtResource("6_dls84")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.117647)
+
+[connection signal="timeout" from="DashTime" to="." method="_on_dash_time_timeout"]
+[connection signal="timeout" from="WallJumpTime" to="." method="_on_wall_jump_time_timeout"]
+[connection signal="asTakedDamage" from="Life" to="." method="_on_life_as_taked_damage"]
+[connection signal="died" from="Life" to="." method="_on_life_died"]

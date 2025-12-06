@@ -1,0 +1,171 @@
+[gd_scene load_steps=22 format=3 uid="uid://d4hrofvhv1gtp"]
+
+[ext_resource type="Script" uid="uid://ddvqlj2k55bex" path="res://Script/base_enemy.gd" id="1_fipn5"]
+[ext_resource type="PackedScene" uid="uid://bpo03typb6vg1" path="res://Scene/Component/search_opponnent.tscn" id="2_ggtts"]
+[ext_resource type="PackedScene" uid="uid://crnphwu5n4154" path="res://Scene/Component/life_componnent.tscn" id="3_ogwqb"]
+[ext_resource type="PackedScene" uid="uid://dftjapl6twn5o" path="res://Scene/Component/hurt_box_componnent.tscn" id="4_5qgox"]
+[ext_resource type="PackedScene" uid="uid://b06w2g4myuic" path="res://Scene/Component/hitbox_componnent.tscn" id="5_2wctu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ggtts"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fipn5"]
+material = SubResource("StandardMaterial3D_ggtts")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_348m6"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_5qgox"]
+material = SubResource("StandardMaterial3D_348m6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0el03"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2wctu"]
+material = SubResource("StandardMaterial3D_0el03")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xi267"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dfpy8"]
+material = SubResource("StandardMaterial3D_xi267")
+size = Vector3(0.3, 0.1, 0.05)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ggtts"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ggtts"]
+radius = 5.73118
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ogwqb"]
+radius = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xi267"]
+radius = 0.616778
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5qgox"]
+
+[sub_resource type="Animation" id="Animation_5qgox"]
+resource_name = "Attack"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.349066, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2wctu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xi267"]
+_data = {
+&"Attack": SubResource("Animation_5qgox"),
+&"RESET": SubResource("Animation_2wctu")
+}
+
+[node name="baseEnemy" type="CharacterBody3D" node_paths=PackedStringArray("searchOpponent", "hitbox") groups=["enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_fipn5")
+searchOpponent = NodePath("searchOpponent")
+hitbox = NodePath("Hitbox")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_fipn5")
+
+[node name="Eyes" type="Node3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, -0.112999)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D/Eyes"]
+transform = Transform3D(0.205, 0, 0, 0, 0.205, 0, 0, 0, 0.205, 0.180359, 1.46258, -0.312263)
+visibility_range_begin = 0.5
+mesh = SubResource("SphereMesh_5qgox")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D/Eyes/MeshInstance3D"]
+transform = Transform3D(0.852726, -0.179368, -0.0794353, 0.178594, 0.856418, -0.0166369, 0.0811588, 0, 0.871228, 0.0280534, 0, -0.0645221)
+visibility_range_begin = 0.5
+mesh = SubResource("SphereMesh_2wctu")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D/Eyes"]
+transform = Transform3D(0.205, 0, 0, 0, 0.205, 0, 0, 0, 0.205, -0.190379, 1.46258, -0.312263)
+visibility_range_begin = 0.5
+mesh = SubResource("SphereMesh_5qgox")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D/Eyes/MeshInstance3D2"]
+transform = Transform3D(0.852726, -0.179368, -0.0794353, 0.178594, 0.856418, -0.0166369, 0.0811588, 0, 0.871228, -0.0424245, 0, -0.0570371)
+visibility_range_begin = 0.5
+mesh = SubResource("SphereMesh_2wctu")
+
+[node name="EyeBrow" type="Node3D" parent="MeshInstance3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D/EyeBrow"]
+transform = Transform3D(0.918947, -0.394049, 0.0161893, 0.39384, 0.914765, -0.0899715, 0.0206438, 0.089055, 0.995813, 0.201905, 0.755946, -0.446966)
+mesh = SubResource("BoxMesh_dfpy8")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D/EyeBrow"]
+transform = Transform3D(0.91777, 0.396804, 0.0156427, -0.393918, 0.914666, -0.0906326, -0.0502712, 0.0770179, 0.995762, -0.202, 0.756, -0.447)
+mesh = SubResource("BoxMesh_dfpy8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_ggtts")
+
+[node name="searchOpponent" parent="." instance=ExtResource("2_ggtts")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="searchOpponent/searchArea3D" index="0"]
+shape = SubResource("SphereShape3D_ggtts")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="searchOpponent/stopSearchArea3D" index="0"]
+shape = SubResource("SphereShape3D_ogwqb")
+
+[node name="AttackCoolDownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Life" parent="." instance=ExtResource("3_ogwqb")]
+MAX_HEALTH = 6
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("lifeComponnent") instance=ExtResource("4_5qgox")]
+lifeComponnent = NodePath("../Life")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+shape = SubResource("CapsuleShape3D_xi267")
+
+[node name="Hitbox" parent="." instance=ExtResource("5_2wctu")]
+damage = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.54952)
+shape = SubResource("CapsuleShape3D_5qgox")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xi267")
+}
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+debug_enabled = true
+
+[connection signal="timeout" from="AttackCoolDownTimer" to="." method="_on_attack_cool_down_timer_timeout"]
+[connection signal="died" from="Life" to="." method="_on_life_died"]
+
+[editable path="searchOpponent"]

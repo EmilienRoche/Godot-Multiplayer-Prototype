@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5tfx26vajxq4"]
+
+[ext_resource type="Script" uid="uid://yipp7gh7hv71" path="res://Script/Componenet/is_interactible.gd" id="1_b5qt2"]
+
+[node name="isInteractible" type="Area3D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_b5qt2")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

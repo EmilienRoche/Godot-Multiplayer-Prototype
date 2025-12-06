@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpo03typb6vg1"]
+
+[ext_resource type="Script" uid="uid://cjha3fwbo3pr7" path="res://Script/Componenet/searchOpponent.gd" id="1_8h0ki"]
+
+[node name="searchOpponent" type="Node3D"]
+script = ExtResource("1_8h0ki")
+objectToSearchGroup = "Player"
+
+[node name="searchArea3D" type="Area3D" parent="."]
+collision_mask = 3
+
+[node name="stopSearchArea3D" type="Area3D" parent="."]
+collision_mask = 3
+
+[connection signal="body_entered" from="searchArea3D" to="." method="_on_search_area_3d_body_entered"]
+[connection signal="body_exited" from="searchArea3D" to="." method="_on_search_area_3d_body_exited"]
+[connection signal="body_entered" from="stopSearchArea3D" to="." method="_on_stop_search_area_3d_body_entered"]
+[connection signal="body_exited" from="stopSearchArea3D" to="." method="_on_stop_search_area_3d_body_exited"]
