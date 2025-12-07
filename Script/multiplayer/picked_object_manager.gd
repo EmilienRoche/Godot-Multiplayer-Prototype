@@ -8,16 +8,20 @@ var pickedWeaponCounter : int = 0
 # Request to add the picked weapon, can be call from the Client
 # It return a boolean to know if their is the pickable object of the object in the scene
 @rpc("any_peer")
-func request_add_picked_weapon(weaponToSpawn, objectPath):
+func request_add_picked_weapon(weaponToSpawn, objectPath, uniqueID):
 	var isRequestApproved = false
 	if objPaths.has(weaponToSpawn):
-		rpc("add_newly_picked_weapon", pickedWeaponCounter, weaponToSpawn, objectPath)
 		pickedWeaponCounter += 1
 		isRequestApproved = true
-	else:
-		isRequestApproved = false
-	
-	return isRequestApproved
+		print(objectPath)
+		# Call the function to make the variable at true to continue the objectToHold function of the player
+		if uniqueID != 1:
+			get_node(objectPath).rpc_id(uniqueID ,"remote_set_isRequestAproved", isRequestApproved)
+		else:
+			get_node(objectPath).remote_set_isRequestAproved(isRequestApproved)
+		
+		rpc("add_newly_picked_weapon", pickedWeaponCounter, weaponToSpawn, objectPath)
+
 
 # Add the picked weapon to object (the player) with the variable 
 # objectPath that store the path of the place of this object

@@ -51,6 +51,7 @@ var itemToHold = null
 
 var asTakenSprintValue : bool = false
 var asTakenWalkValue : bool = true
+var isRequesteAproved : bool = false
 
 func _ready():
 	# Wait one frame to make sure all things are initialized
@@ -283,18 +284,27 @@ func raycastColliding(ray : RayCast3D):
 # Is called by the pickable object script, put the object in the player hand
 func objectToHold(object):
 	if object != null && itemToHold == null:
-		var isRequesteAproved # is not use for the moment 
+		print("isRequestApproved : " + str(isRequesteAproved))
 		if multiplayer.is_server():
-			isRequesteAproved = get_node("/root/Main/Networking/PickedObjectManager").request_add_picked_weapon(object, self.get_path())
+			get_node("/root/Main/Networking/PickedObjectManager").request_add_picked_weapon(object, self.get_path(), multiplayer.get_unique_id())
+			print("SERVER : " + str(isRequesteAproved))
 		else:
-			isRequesteAproved = get_node("/root/Main/Networking/PickedObjectManager").rpc_id(1, "request_add_picked_weapon", object, self.get_path()) 
+			get_node("/root/Main/Networking/PickedObjectManager").rpc_id(1, "request_add_picked_weapon", object, self.get_path(), multiplayer.get_unique_id()) 
+			print("CLIENT : " + str(isRequesteAproved))
+			
 		
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(2).timeout
 		print("REQUEST APPROVED : " +  str(isRequesteAproved))
-		
-		itemToHold = get_node("Head/Camera3D/WeaponMarker3D").get_children()
-		itemToHold[0].holdingCharacter = self
-		print("ITEM TO HOLD : " + str(itemToHold))
+		if isRequesteAproved:
+			itemToHold = get_node("Head/Camera3D/WeaponMarker3D").get_children()
+			itemToHold[0].holdingCharacter = self
+			print("ITEM TO HOLD : " + str(itemToHold))
+
+
+@rpc("any_peer" ,"reliable")
+func remote_set_isRequestAproved(result):
+	print("HEEEEEEEEEEEEEEEEEEEEEEELO")
+	isRequesteAproved = result
 
 
 func showLife():

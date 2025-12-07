@@ -89,7 +89,6 @@ func start_client():
 	)
 
 
-
 func _on_host_game_button_pressed() -> void:
 	start_server()
 

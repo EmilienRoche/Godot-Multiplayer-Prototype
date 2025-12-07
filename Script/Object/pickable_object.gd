@@ -50,9 +50,9 @@ func _process(delta: float) -> void:
 	if objectRaycast != self:
 		$Label3D.visible = true
 		if Input.is_action_just_pressed("interact") && objectRaycast.itemToHold == null:
-			print("ITEM HOLD : " + str(objectRaycast.itemToHold))
 			canDelete = true
 			# objectToHold is a function in the Player script
+			print("OBJECT TO PICK : " + str(objectToPick))
 			objectRaycast.objectToHold(objectToPick)
 	else:
 		$Label3D.visible = false
