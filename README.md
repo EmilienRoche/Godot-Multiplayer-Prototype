@@ -15,10 +15,10 @@ It explores core networking concepts such as client/server connections, state sy
 
 The goal of this project was to experiment with low-level multiplayer mechanics, including:
 
-- server-authoritative movement and game state
-- basic player actions and combat logic
-- real-time synchronization over ENet
-- networking setup for both LAN and online play
+- Server-authoritative movement and game state
+- Basic player actions and combat logic
+- Real-time synchronization over ENet
+- Networking setup for both LAN and online play
 
 ## How to Run
 
