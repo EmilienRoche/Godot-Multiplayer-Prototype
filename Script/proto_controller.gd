@@ -293,7 +293,7 @@ func objectToHold(object):
 			print("CLIENT : " + str(isRequesteAproved))
 			
 		
-		await get_tree().create_timer(2).timeout
+		await get_tree().create_timer(0.5).timeout
 		print("REQUEST APPROVED : " +  str(isRequesteAproved))
 		if isRequesteAproved:
 			itemToHold = get_node("Head/Camera3D/WeaponMarker3D").get_children()
